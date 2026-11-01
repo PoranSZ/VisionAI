@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#061b18">
+  <meta name="description" content="VisionAI - Real-time computer vision powered by MediaPipe.">
+  <title>VisionAI — Neural Vision Laboratory</title>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+  <div class="app-shell">
+    <header class="navigation">
+      <a class="logo" href="/">
+        VISION<span>AI</span>
+        <small>LABORATORY</small>
+      </a>
+
+      <div class="nav-center">
+        <span>COMPUTER VISION</span>
+        <span class="nav-separator"></span>
+        <span>LOCAL INFERENCE</span>
+      </div>
+
+      <div class="nav-status">
+        <span class="status-light"></span>
+        SYSTEM READY
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-meta">
+          <span>OPEN SOURCE / EXPERIMENT 001</span>
+          <span>MEDIAPIPE + JAVASCRIPT</span>
+        </div>
+
+        <div class="hero-content">
+          <div>
+            <p class="section-kicker">THE FUTURE OF PERCEPTION</p>
+            <h1>
+              SEE BEYOND<br>
+              <em>THE VISIBLE.</em>
+            </h1>
+          </div>
+          <p class="hero-description">
+            Real-time object detection powered by
+            artificial intelligence. Explore machine
+            perception directly in your browser.
+          </p>
+        </div>
+
+        <div class="hero-bottom">
+          <span>01 / NEURAL VISION</span>
+          <span>SCROLL TO EXPLORE ↓</span>
+        </div>
+      </section>
+
+      <section class="workspace" id="laboratory">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">01 — LIVE LABORATORY</p>
+            <h2>Machine <em>Perception</em></h2>
+          </div>
+          <div id="liveBadge" class="live-badge">
+            <span class="status-light"></span> OFFLINE
+          </div>
+        </div>
+
+        <div class="metrics">
+          <article class="metric">
+            <span class="metric-label">01 / OBJECTS IN FRAME</span>
+            <strong id="objectCount">0</strong>
+            <span class="metric-foot">CURRENT DETECTIONS</span>
+          </article>
+
+          <article class="metric">
+            <span class="metric-label">02 / PROCESSING SPEED</span>
+            <strong id="fps">0.0</strong>
+            <span class="metric-foot">INFERENCES / SECOND</span>
+          </article>
+
+          <article class="metric">
+            <span class="metric-label">03 / MODEL CONFIDENCE</span>
+            <strong id="confidence">0%</strong>
+            <span class="metric-foot">AVERAGE CERTAINTY</span>
+          </article>
+
+          <article class="metric">
+            <span class="metric-label">04 / TOTAL OBSERVATIONS</span>
+            <strong id="total">0</strong>
+            <span class="metric-foot">ACCUMULATED COUNT</span>
+          </article>
+        </div>
+
+        <div class="work-grid">
+          <section class="camera-panel">
+            <div class="panel-top">
+              <div class="panel-title">
+                <span class="panel-symbol">✳</span>
+                <span>LIVE VISUAL INPUT</span>
+              </div>
+              <span class="panel-info">CAM / 001</span>
+            </div>
+
+            <div class="camera-container">
+              <video id="webcam" autoplay muted playsinline></video>
+              <canvas id="overlay"></canvas>
+
+              <div class="camera-overlay-top">
+                <span id="cameraStatus">CAMERA INACTIVE</span>
+                <span>VISION AI / REC</span>
+              </div>
+
+              <div class="camera-crosshair">+</div>
+
+              <div class="camera-overlay-bottom">
+                <span>NEURAL OBJECT DETECTOR</span>
+                <span>640 × 480</span>
+              </div>
+            </div>
+
+            <div class="camera-controls">
+              <button id="startBtn" class="btn-primary">
+                <span>◉</span> INITIALIZE VISION
+              </button>
+
+              <button id="stopBtn" class="btn-outline" disabled>
+                ■ STOP
+              </button>
+
+              <button id="captureBtn" class="btn-outline" disabled>
+                ↧ CAPTURE
+              </button>
+            </div>
+
+            <div class="system-message">
+              <span class="tiny-dot"></span>
+              <span id="status">Ready to initialize camera</span>
+            </div>
+          </section>
+
+          <aside class="analysis-panel">
+            <div class="panel-top">
+              <div class="panel-title">
+                <span class="panel-symbol">⌗</span>
+                <span>DETECTION ENGINE</span>
+              </div>
+              <span class="panel-info">LIVE</span>
+            </div>
+
+            <div class="analysis-intro">
+              <span class="section-kicker">MODEL OUTPUT</span>
+              <h3>What the AI <em>sees.</em></h3>
+              <p>
+                Objects identified in the current
+                frame with confidence scores.
+              </p>
+            </div>
+
+            <div id="detections" class="detection-list">
+              <p class="empty">Awaiting visual input...</p>
+            </div>
+
+            <div class="analysis-footer">
+              <span>MODEL</span>
+              <strong>EFFICIENTDET LITE0</strong>
+              <span>ENGINE</span>
+              <strong>MEDIAPIPE</strong>
+            </div>
+          </aside>
+        </div>
+
+        <section class="history-panel">
+          <div class="panel-top">
+            <div class="panel-title">
+              <span class="panel-symbol">≋</span>
+              <span>OBSERVATION LOG</span>
+            </div>
+            <button id="clearBtn" class="text-button">
+              CLEAR HISTORY ↗
+            </button>
+          </div>
+
+          <div class="history-heading">
+            <h3>Detection <em>History</em></h3>
+            <p>Recent observations recorded during analysis.</p>
+          </div>
+
+          <div id="history" class="history-list">
+            <p class="empty">No observations recorded.</p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-brand">VISIONAI <span>© 2026</span></div>
+      <p>BUILT WITH JAVASCRIPT / MEDIAPIPE</p>
+      <p>LOCAL PROCESSING — NO CLOUD REQUIRED</p>
+    </footer>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
